@@ -95,6 +95,12 @@ Open the local URL printed by Vite (normally `http://127.0.0.1:5173`). The Vite 
 
 The same commands work in PowerShell. If you need a local environment file, copy the template with `Copy-Item .env.example .env`. Never add `.env` or credentials to Git.
 
+## Deploy a free demo
+
+The project includes a Render Blueprint for a single FastAPI web service that also serves the built React app. To deploy it, open the [Render Blueprint creation page](https://dashboard.render.com/blueprint/new?repo=https://github.com/Yuussef/paydoc-ai-iso20022), connect the public GitHub repository, and create the Blueprint. Render builds the frontend and API from `render.yaml` and assigns an `onrender.com` URL.
+
+The free web service can spin down after 15 minutes without requests, so the first visit after inactivity may take a little longer. This is a portfolio demo: do not submit real payment messages, customer information, or confidential documents. No ISO XSD or AWS credentials are included; validation needs a schema you are permitted to use, and the AI assistant stays disabled until configured.
+
 ## Add a permitted local ISO 20022 schema
 
 1. Visit the [official ISO 20022 Message Definitions catalogue](https://www.iso20022.org/iso-20022-message-definitions) and filter to the Payments domain.

@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: paydoc-ai-iso20022-yuussef
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && npm install --prefix frontend && npm run build --prefix frontend
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/v1/health

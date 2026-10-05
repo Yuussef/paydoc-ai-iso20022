@@ -6,7 +6,7 @@ export default function Dashboard({ health, messages, configured, onNavigate }) 
         <div>
           <div className="eyebrow"><span className="eyebrow-line" /> PAYMENT ENGINEERING TOOLKIT</div>
           <h1>Understand every<br /><span>payment message.</span></h1>
-          <p className="hero-copy">Validate ISO 20022 XML against a versioned local schema, then find the documentation behind the result.</p>
+          <p className="hero-copy">Validate ISO 20022 XML against a versioned schema, then find the documentation behind the result. Use synthetic data only.</p>
           <div className="hero-actions">
             <button className="button-primary" onClick={() => onNavigate("validate")}>Validate a message <span aria-hidden="true">→</span></button>
             <button className="button-secondary" onClick={() => onNavigate("knowledge")}>Search documentation</button>

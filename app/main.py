@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import os
+from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
+from fastapi.staticfiles import StaticFiles
 
 from app.services.knowledge_search import search_documents
 from app.services.registry import SchemaUnavailableError, supported_messages
@@ -97,3 +99,8 @@ async def ask(payload: AskRequest) -> dict[str, Any]:
         ) from exc
     except RuntimeError as exc:
         raise HTTPException(status_code=502, detail="The configured AI model could not complete the request.") from exc
+
+
+FRONTEND_DIST = Path(__file__).resolve().parents[1] / "frontend" / "dist"
+if FRONTEND_DIST.is_dir():
+    app.mount("/", StaticFiles(directory=FRONTEND_DIST, html=True), name="frontend")

@@ -70,7 +70,7 @@ export default function App() {
         <div className="sidebar-bottom">
           <div className="local-card">
             <span className="local-dot" />
-            <div><strong>Local-first</strong><small>Your files stay on this machine</small></div>
+            <div><strong>Demo environment</strong><small>Use synthetic payment data only</small></div>
           </div>
           <span className="version-label">PORTFOLIO BUILD · 0.1.0</span>
         </div>
