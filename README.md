@@ -243,14 +243,14 @@ Expected flow: call `validate_message` â†’ search for the relevant field/rule â†
 
 ## Publish to GitHub
 
-The project directory is an isolated Git repository on branch `main`. Create an empty GitHub repository named `paydoc-ai` (do not initialize it with another README), then connect and push it:
+This project is published at [github.com/Yuussef/paydoc-ai-iso20022](https://github.com/Yuussef/paydoc-ai-iso20022). Clone it with:
 
 ```bash
-git remote add origin https://github.com/<your-account>/paydoc-ai.git
-git push -u origin main
+git clone https://github.com/Yuussef/paydoc-ai-iso20022.git
+cd paydoc-ai-iso20022
 ```
 
-Before pushing, install the frontend dependencies once and commit the generated `frontend/package-lock.json`. Do not force-add local XSDs or `.env` files; `.gitignore` excludes them by default.
+To publish later changes, commit them on `main` and run `git push`. Do not force-add local XSDs or `.env` files; `.gitignore` excludes them by default. The frontend does not yet include an npm lockfile; generate and commit `frontend/package-lock.json` after reviewing the dependency versions if reproducible npm installs are required.
 
 ## References
 
