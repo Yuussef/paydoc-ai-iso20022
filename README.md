@@ -9,14 +9,14 @@
 | Capability | Status |
 | --- | --- |
 | FastAPI health and schema-registry endpoints | Implemented |
-| Secure XML parsing and local XSD validation | Implemented; requires you to install a permitted XSD locally |
+| Secure XML parsing and local XSD validation | Implemented; includes a synthetic demo XSD, not an official ISO 20022 schema |
 | Local source manifest and keyword search with provenance links | Implemented; starter corpus contains one original project note |
 | React dashboard, validator form, XML file upload, search UI | Implemented |
 | MCP server exposing shared domain operations over stdio | Implemented; install the optional `ai` dependencies |
 | Bedrock Converse client invoking MCP tools and returning sources | Implemented; requires AWS credentials and a configured model with tool use |
 | Starter evaluation cases | Included in `data/evaluations/starter.jsonl`; runner and measured metrics are next |
 
-The registry starts empty on purpose. The app never downloads a schema, invents a validation outcome, or assumes an ISO 20022 version. The starter search is lexical keyword matching, not embeddings or semantic RAG. The optional AI path is disabled until configured and needs the `ai` dependency extra.
+The registry includes one synthetic demo schema so you can exercise the validator; it is not an official ISO 20022 schema. No official ISO message version is bundled. Add an approved XSD and register its exact message ID before validating real ISO message structures. The app never downloads a schema or guesses a version. The starter search is lexical keyword matching, not embeddings or semantic RAG. The optional AI path is disabled until configured and needs the `ai` dependency extra.
 
 ## Why this project
 
@@ -103,11 +103,12 @@ The free web service can spin down after 15 minutes without requests, so the fir
 
 ## Add a permitted local ISO 20022 schema
 
-1. Visit the [official ISO 20022 Message Definitions catalogue](https://www.iso20022.org/iso-20022-message-definitions) and filter to the Payments domain.
-2. Select one message definition and record its **complete identifier and version**. Start with one `pacs.008` version only; do not mix versions in a registry entry.
-3. From the relevant message set, obtain the XSD and the smallest useful official reference document. ISO notes that message-set documentation (such as MDRs/MUGs) is provided at message-set level, while each message definition has its own schema.
-4. Review the terms for the files. Put the XSD in `data/schemas/` for local use. `.gitignore` excludes `*.xsd` by default; do not force-add downloaded files unless their terms permit redistribution.
-5. Edit `data/schemas/registry.json` with the **actual** identifier and filename from the catalogue:
+1. To verify the demo, choose `demo.000.001.01` in the validator and click **Load demo XML**. It should pass the bundled synthetic schema. This sample is not ISO 20022.
+2. For a real message, visit the [official ISO 20022 Message Definitions catalogue](https://www.iso20022.org/iso-20022-message-definitions) and filter to the Payments domain.
+3. Select one message definition and record its **complete identifier and version**. Start with one `pacs.008` version only; do not mix versions in a registry entry.
+4. From the relevant message set, obtain the XSD and the smallest useful official reference document. ISO notes that message-set documentation (such as MDRs/MUGs) is provided at message-set level, while each message definition has its own schema.
+5. Review the terms for the files. Put the XSD in `data/schemas/` for local use. `.gitignore` excludes downloaded `*.xsd` files by default; do not force-add third-party files unless their terms permit redistribution.
+6. Edit `data/schemas/registry.json` with the **actual** identifier and filename from the catalogue:
 
    ```json
    {
@@ -120,8 +121,8 @@ The free web service can spin down after 15 minutes without requests, so the fir
 
    These values show the registry shape only. Confirm that the selected official version and downloaded filename really match; update both if they do not.
 
-6. Restart neither API nor UI: the API reads the registry on each request. Refresh the dashboard; the version appears when its local XSD is present.
-7. Use synthetic XML for validation. A missing/unregistered XSD returns HTTP `409` with setup guidance; malformed XML returns a deterministic invalid result; XSD failures return diagnostics.
+7. Restart neither API nor UI: the API reads the registry on each request. Refresh the dashboard; the version appears when its local XSD is present.
+8. Use synthetic XML for validation. A missing/unregistered XSD returns HTTP `409` with setup guidance; malformed XML returns a deterministic invalid result; XSD failures return diagnostics.
 
 If the local schema package uses XSD imports/includes, keep the required companion schemas beside it and verify that the selected XSD resolves them from the local directory. Do not point the registry to an arbitrary user-uploaded path.
 

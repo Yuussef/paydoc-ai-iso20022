@@ -23,7 +23,7 @@ export default function Dashboard({ health, messages, configured, onNavigate }) 
       {!configured && (
         <section className="setup-banner" aria-label="Schema setup notice">
           <span className="banner-icon" aria-hidden="true">i</span>
-          <div><strong>No ISO schemas are configured yet</strong><p>Add an approved XSD and register its exact message version to enable validation. The app will not guess or download schemas for you.</p></div>
+          <div><strong>No official ISO schemas are configured yet</strong><p>A synthetic demo XSD is available to try validation. Add a permitted official XSD and register its exact message version before validating ISO 20022 messages.</p></div>
           <button className="text-button" onClick={() => onNavigate("validate")}>Setup details <span aria-hidden="true">→</span></button>
         </section>
       )}

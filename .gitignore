@@ -16,6 +16,7 @@ frontend/.vite/
 .env.*
 !.env.example
 data/schemas/*.xsd
+!data/schemas/demo-payment.xsd
 data/private/
 data/knowledge/local/
 

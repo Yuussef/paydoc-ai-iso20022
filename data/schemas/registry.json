@@ -1,1 +1,7 @@
-{}
+{
+  "demo.000.001.01": {
+    "title": "Synthetic Demo Payment (not ISO 20022)",
+    "file": "demo-payment.xsd",
+    "synthetic": true
+  }
+}

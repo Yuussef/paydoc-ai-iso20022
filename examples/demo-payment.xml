@@ -1,0 +1,5 @@
+<DemoPayment>
+  <MessageId>TEST-001</MessageId>
+  <Amount>125.50</Amount>
+  <Currency>EUR</Currency>
+</DemoPayment>

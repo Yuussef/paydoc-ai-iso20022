@@ -147,6 +147,7 @@ select:disabled { opacity: 0.65; }
 .field-note code { color: #e7cd95; }
 .editor-toolbar { display: flex; justify-content: space-between; align-items: center; margin: 18px 0 7px; }
 .editor-toolbar .field-label { margin: 0; }
+.editor-toolbar-actions { display: flex; align-items: center; gap: 14px; }
 .upload-button { border: 0; padding: 3px 0; color: #b3a2fb; background: transparent; cursor: pointer; font-size: 9px; }
 .upload-button:hover { color: #ded5ff; }
 .code-editor { display: block; width: 100%; min-height: 265px; resize: vertical; border: 1px solid #2c3b52; border-radius: 5px; padding: 12px; background: #0b1421; color: #a9c4df; font: 10px/1.75 "DM Mono", monospace; tab-size: 2; }

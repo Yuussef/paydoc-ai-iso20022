@@ -1,5 +1,8 @@
 import { useRef, useState } from "react";
 
+const DEMO_MESSAGE_ID = "demo.000.001.01";
+const DEMO_XML = `<DemoPayment>\n  <MessageId>TEST-001</MessageId>\n  <Amount>125.50</Amount>\n  <Currency>EUR</Currency>\n</DemoPayment>`;
+
 export default function ValidatorPanel({ messages, configured, api }) {
   const [messageId, setMessageId] = useState("");
   const [xml, setXml] = useState("");
@@ -19,6 +22,11 @@ export default function ValidatorPanel({ messages, configured, api }) {
     setXml(value);
     setResult(null);
     setError("");
+  }
+
+  function loadDemo() {
+    updateMessageId(DEMO_MESSAGE_ID);
+    updateXml(DEMO_XML);
   }
 
   async function submit(event) {
@@ -65,13 +73,13 @@ export default function ValidatorPanel({ messages, configured, api }) {
 
   return (
     <section className="tool-page">
-      <div className="tool-intro"><div className="eyebrow"><span className="eyebrow-line" /> DETERMINISTIC CHECK</div><h1>Validate XML</h1><p>Check a synthetic payment message against the exact local XSD version. No model is involved in deciding the result.</p></div>
+      <div className="tool-intro"><div className="eyebrow"><span className="eyebrow-line" /> DETERMINISTIC CHECK</div><h1>Validate XML</h1><p>Try the included synthetic example (not ISO 20022), or add an approved XSD for a real message version. No model is involved in deciding the result.</p></div>
       <div className="tool-layout">
         <form className="surface-card editor-card" onSubmit={submit}>
           <div className="card-heading"><div><div className="eyebrow">MESSAGE INPUT</div><h3>Validation request</h3></div><span className="local-tag"><span className="status-dot green" />LOCAL XSD</span></div>
           <label className="field-label" htmlFor="message-id">Message definition</label>
           {available.length ? <select id="message-id" value={messageId} onChange={(event) => updateMessageId(event.target.value)} required><option value="">Select a registered version</option>{available.map((item) => <option key={item.message_id} value={item.message_id}>{item.message_id} — {item.title}</option>)}</select> : <div className="field-note">No schemas are available. Register a locally approved XSD in <code>data/schemas/registry.json</code>.</div>}
-          <div className="editor-toolbar"><label className="field-label" htmlFor="xml-input">XML document</label><button type="button" className="upload-button" onClick={() => fileInput.current?.click()}>↑ <span>Upload .xml</span></button><input ref={fileInput} className="visually-hidden" type="file" accept=".xml,text/xml,application/xml" onChange={loadFile} aria-label="Upload an XML file" /></div>
+          <div className="editor-toolbar"><label className="field-label" htmlFor="xml-input">XML document</label><div className="editor-toolbar-actions"><button type="button" className="upload-button" onClick={loadDemo}>Load demo XML</button><button type="button" className="upload-button" onClick={() => fileInput.current?.click()}>↑ <span>Upload .xml</span></button></div><input ref={fileInput} className="visually-hidden" type="file" accept=".xml,text/xml,application/xml" onChange={loadFile} aria-label="Upload an XML file" /></div>
           <textarea id="xml-input" className="code-editor" value={xml} onChange={(event) => updateXml(event.target.value)} placeholder={'Paste synthetic ISO 20022 XML here…\n\nThe validator only runs when a matching local XSD is registered.'} spellCheck="false" required />
           <div className="editor-meta"><span>{xml.length.toLocaleString()} / 1,000,000 characters</span><span>External entities disabled</span></div>
           <button className="button-primary submit-button" type="submit" disabled={loading || !messageId || !xml.trim()}>{loading ? "Validating…" : "Run XSD validation"}<span aria-hidden="true">→</span></button>

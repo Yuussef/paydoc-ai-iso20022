@@ -53,6 +53,10 @@ def supported_messages() -> dict[str, Any]:
                 "message_id": message_id,
                 "title": title[:160],
                 "available": schema_path(message_id) is not None,
+                "synthetic": metadata.get("synthetic") is True,
             }
         )
-    return {"messages": messages, "configured": any(item["available"] for item in messages)}
+    return {
+        "messages": messages,
+        "configured": any(item["available"] and not item["synthetic"] for item in messages),
+    }
