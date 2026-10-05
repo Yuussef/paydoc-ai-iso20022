@@ -1,0 +1,17 @@
+[project]
+name = "paydoc-ai"
+version = "0.1.0"
+description = "Local-first ISO 20022 validation and documentation workbench"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi[standard]>=0.142.2",
+    "lxml>=5.0.0",
+    "python-dotenv>=1.0.1",
+]
+
+[project.optional-dependencies]
+ai = [
+    "boto3>=1.40.0",
+    "mcp[cli]>=2,<3",
+]

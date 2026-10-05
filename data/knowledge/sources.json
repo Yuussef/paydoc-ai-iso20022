@@ -1,0 +1,9 @@
+[
+  {
+    "id": "iso20022-catalogue-overview",
+    "title": "ISO 20022 Message Definitions catalogue",
+    "message_id": null,
+    "url": "https://www.iso20022.org/iso-20022-message-definitions",
+    "file": "catalogue-overview.md"
+  }
+]

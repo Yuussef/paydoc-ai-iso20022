@@ -1,0 +1,1 @@
+"""PayDoc AI FastAPI application."""
